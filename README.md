@@ -40,6 +40,12 @@ The go script should be put in the `main` package. The following lifecycle callb
 
 The return values of the lifecycle callback functions are optional, they can also be defined without a return value. The function parameters are also optional, but their order is fixed.
 
+The script is executed similarly to the JavaScript language:
+
+```bash
+./k6 run scripts/simple/script.go
+```
+
 ### Setup
 
 `Setup` function corresponds to the [setup function](https://k6.io/docs/using-k6/test-lifecycle/#setup-and-teardown-stages) of the JavaScript API.
@@ -328,13 +334,13 @@ You can also use pre-built k6 image within a Docker container. In order to do th
 **Linux**
 
 ```plain
-docker run -v $(pwd):/scripts -it --rm ghcr.io/szkiba/xk6-g0:latest run --out=dashboard /scripts/script.js
+docker run -v $(pwd):/work -it --rm ghcr.io/szkiba/xk6-g0:latest run /work/scripts/simple/script.go
 ```
 
 **Windows**
 
 ```plain
-docker run -v %cd%:/scripts -it --rm ghcr.io/szkiba/xk6-g0:latest run --out=dashboard /scripts/script.js
+docker run -v %cd%:/work -it --rm ghcr.io/szkiba/xk6-g0:latest run /work/scripts/simple/script.go
 ```
 
 ## Example scripts
