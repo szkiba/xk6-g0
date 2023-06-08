@@ -11,7 +11,6 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.k6.io/k6/js/common"
@@ -26,7 +25,7 @@ type checker struct {
 
 func (c *checker) Errorf(format string, args ...interface{}) {
 	state := c.vu.State()
-	if state == nil || !state.Logger.IsLevelEnabled(logrus.DebugLevel) {
+	if state == nil {
 		return
 	}
 
