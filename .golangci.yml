@@ -36,6 +36,7 @@ linters:
     - sqlclosecheck
     - wastedassign
 run:
+  timeout: 10m
   skip-files:
     - "doc.go"
     - "example_.*test.go"
