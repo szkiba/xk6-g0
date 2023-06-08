@@ -40,6 +40,12 @@ The go script should be put in the `main` package. The following lifecycle callb
 
 The return values of the lifecycle callback functions are optional, they can also be defined without a return value. The function parameters are also optional, but their order is fixed.
 
+The script is executed similarly to the JavaScript language:
+
+```bash
+./k6 run scripts/simple/script.go
+```
+
 ### Setup
 
 `Setup` function corresponds to the [setup function](https://k6.io/docs/using-k6/test-lifecycle/#setup-and-teardown-stages) of the JavaScript API.
@@ -142,7 +148,7 @@ var Options map[string]interface{}
 The xk6-g0 is currently in Proof of Concept status. The further fate of the development depends on the community's feedback on the usefulness of the concept.
 
 **Is it useful to support the go language (yaegi interpreter) in k6 tests?**
-You can vote here: TBD
+You can vote here: https://github.com/szkiba/xk6-g0/discussions/1
 
 ## API
 
@@ -328,13 +334,13 @@ You can also use pre-built k6 image within a Docker container. In order to do th
 **Linux**
 
 ```plain
-docker run -v $(pwd):/scripts -it --rm ghcr.io/szkiba/xk6-g0:latest run --out=dashboard /scripts/script.js
+docker run -v $(pwd):/work -it --rm ghcr.io/szkiba/xk6-g0:latest run /work/scripts/simple/script.go
 ```
 
 **Windows**
 
 ```plain
-docker run -v %cd%:/scripts -it --rm ghcr.io/szkiba/xk6-g0:latest run --out=dashboard /scripts/script.js
+docker run -v %cd%:/work -it --rm ghcr.io/szkiba/xk6-g0:latest run /work/scripts/simple/script.go
 ```
 
 ## Example scripts

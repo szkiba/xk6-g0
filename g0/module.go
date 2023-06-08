@@ -7,7 +7,6 @@ package g0
 import (
 	"os"
 
-	"github.com/sirupsen/logrus"
 	"github.com/szkiba/xk6-g0/internal/builtin/testify/assertions"
 	"github.com/szkiba/xk6-g0/internal/builtin/testify/requirements"
 	"github.com/traefik/yaegi/interp"
@@ -135,7 +134,6 @@ func (mod *Module) Exports() modules.Exports {
 }
 
 func (mod *Module) callSetup() (interface{}, error) {
-	logrus.SetLevel(mod.vu.State().Logger.GetLevel())
 	mod.vu.State().Logger.Debug("Calling Setup")
 
 	return mod.setupFunc(mod.vu.Context(), mod.assert, mod.require)
