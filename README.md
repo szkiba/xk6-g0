@@ -142,7 +142,7 @@ var Options map[string]interface{}
 The xk6-g0 is currently in Proof of Concept status. The further fate of the development depends on the community's feedback on the usefulness of the concept.
 
 **Is it useful to support the go language (yaegi interpreter) in k6 tests?**
-You can vote here: TBD
+You can vote here: https://github.com/szkiba/xk6-g0/discussions/1
 
 ## API
 
