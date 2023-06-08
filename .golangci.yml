@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2023 Iván Szkiba
+#
+# SPDX-License-Identifier: MIT
+
+linters:
+  presets:
+    - bugs
+    - style
+    - unused
+    - complexity
+    - format
+    - performance
+  enable:
+    - exportloopref
+  disable:
+    - testpackage
+    - ireturn
+    - nolintlint
+    - gochecknoglobals
+    - lll
+    - wrapcheck
+    - gochecknoinits
+# deprecated
+    - deadcode
+    - nosnakecase
+    - exhaustivestruct
+    - ifshort
+    - structcheck
+    - varcheck
+    - golint
+    - interfacer
+    - maligned
+    - scopelint
+# generics
+    - rowserrcheck
+    - sqlclosecheck
+    - wastedassign
+run:
+  skip-files:
+    - "doc.go"
+    - "example_.*test.go"
+  skip-dirs:
+    - "scripts"

@@ -1,0 +1,15 @@
+func (a *Assertions) {{.DocInfo.Name}}({{.Params}}) {
+	if h, ok := a.t.(tHelper); ok { h.Helper() }
+  succ := assert.{{.DocInfo.Name}}(a.t, {{.ForwardedParams}})
+	if c, ok := a.t.(tChecker); ok {
+{{- if eq (slice (printf "a%s" .DocInfo.Name) (len .DocInfo.Name)) "f"  }}
+name := fmt.Sprintf(msg, args...)
+{{else}}
+name := fmt.Sprint(msgAndArgs...)
+{{end -}}
+    c.Check(name, succ)
+  }
+  if !succ {
+    a.t.FailNow()
+  }
+}

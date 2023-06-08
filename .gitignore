@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2023 Iván Szkiba
+#
+# SPDX-License-Identifier: MIT
+
+bin
+dist
+coverage.txt
+k6
+
+test_*.json*
+
+# editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

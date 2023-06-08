@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2023 Iván Szkiba
+#
+# SPDX-License-Identifier: MIT
+
+bin
+dist
+node_modules
+yarn.lock
