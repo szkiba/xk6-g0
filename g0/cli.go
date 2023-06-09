@@ -57,6 +57,8 @@ func RedirectStdin() {
 		logrus.WithError(err).Fatal()
 	}
 
+	defer writer.Close()
+
 	origStdin := os.Stdin
 
 	os.Stdin = reader
