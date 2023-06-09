@@ -27,7 +27,7 @@ xk6-g0 is an experiment to use the go programming language as a full-fledged scr
 
 When using xk6-g0, the tests are executed by a built-in go interpreter ([yaegi](https://github.com/traefik/yaegi)), so there is no need for a compilation or build phase. It is true that the speed of interpreted execution does not reach the speed of compiled code, but it has many advantages. On the other hand, even with JavaScript support, the interpreter performs the tests.
 
-Accepting the [benchmark measurement](https://github.com/d5/tengo#benchmark) made with [tengo](https://github.com/d5/tengo)'s developer, the JavaScript ([goja](https://github.com/dop251/goja)) interpreter calculates Fibonacci numbers twice as fast as the go interpreter ([yaegi](https://github.com/traefik/yaegi)). Well, it is relatively rare to count fibonacci numbers in tests, so we are not far wrong with the approximation that there is no double multiplier in execution speed. (someday a more accurate measurement would be useful)
+Accepting the [benchmark measurement](https://github.com/d5/tengo#benchmark) made with [tengo](https://github.com/d5/tengo)'s developer, the JavaScript ([goja](https://github.com/dop251/goja)) interpreter calculates Fibonacci numbers twice as fast as the go interpreter ([yaegi](https://github.com/traefik/yaegi)). Well, it is relatively rare to count fibonacci numbers in tests, so we are not far off with the approximation that there is no double multiplier in execution speed. (someday a more accurate measurement would be useful)
 
 ## Usage
 
