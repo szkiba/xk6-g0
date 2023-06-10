@@ -317,7 +317,7 @@ func Default(ctx context.Context) {
 
 #### JavaScript interop
 
-JavaScript variables and functions can be accessed using the `Value` function of the context parameter. In addition, using the `JS` string variable/constant, a JavaScript code fragment can be specified, which is evaluated before the go code is executed. In this way, practically the entire k6 JavaScript API and external modules are made available to the golang script.
+JavaScript variables and functions can be accessed using the `Value` function of the context parameter. In addition, using the `JS` string variable/constant, a JavaScript code fragment can be specified, which is evaluated before the go code is executed. In this way, practically the entire k6 JavaScript API and external modules are made available to the golang script. This feature is useful until all necessary k6 features are available in xk6-g0.
 
 
 ```go
@@ -336,13 +336,14 @@ func Default(ctx context.Context) {
   logrus.Info(ctx.Value("welcome"))
 }
 
-const JS = `//js
+const JS = `
 
 global.add = function (a, b) {
   return a + b
 }
 
 global.welcome = 'Hello, World!'
+`
 ```
 
 ## Download
