@@ -8,6 +8,7 @@ import (
 	"sync"
 
 	"github.com/imdario/mergo"
+	"github.com/szkiba/xk6-g0/internal/builtin/goquery"
 	"github.com/szkiba/xk6-g0/internal/builtin/logrus"
 	"github.com/szkiba/xk6-g0/internal/builtin/resty"
 	"github.com/szkiba/xk6-g0/internal/builtin/stdlib"
@@ -56,4 +57,5 @@ func init() {
 	RegisterExports(logrus.Exports)
 	RegisterExports(resty.Exports)
 	RegisterExports(testify.Exports)
+	RegisterExports(goquery.Exports)
 }
