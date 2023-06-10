@@ -286,6 +286,65 @@ func init() {
 }
 ```
 
+### Context
+
+The first parameter of the `Default` function is optionally a [context.Context](https://pkg.go.dev/context). This can be used to perform context aware operations and to access various context variables.
+
+#### k6 variables
+
+The usual k6 variables (eg `__VU`, `__ENV`, `__ITER`) and the variables of the `k6/execution` module can be accessed using the `Value` function of the context parameter.
+
+```go
+package main
+
+import (
+  "context"
+
+  "github.com/sirupsen/logrus"
+)
+
+func Default(ctx context.Context) {
+  vu := ctx.Value("__VU").(int64)
+  env := ctx.Value("__ENV").(map[string]string)
+  iter := ctx.Value("__ITER").(int64)
+
+  logrus.Info(vu)
+  logrus.Info(iter)
+  logrus.Info(env["PATH"])
+  logrus.Info(ctx.Value("execution.scenario.name"))
+}
+```
+
+#### JavaScript interop
+
+JavaScript variables and functions can be accessed using the `Value` function of the context parameter. In addition, using the `JS` string variable/constant, a JavaScript code fragment can be specified, which is evaluated before the go code is executed. In this way, practically the entire k6 JavaScript API and external modules are made available to the golang script.
+
+
+```go
+package main
+
+import (
+  "context"
+
+  "github.com/sirupsen/logrus"
+)
+
+func Default(ctx context.Context) {
+  add := ctx.Value("add").(func(...any) any)
+
+  logrus.Info(add(2, 3))
+  logrus.Info(ctx.Value("welcome"))
+}
+
+const JS = `//js
+
+global.add = function (a, b) {
+  return a + b
+}
+
+global.welcome = 'Hello, World!'
+```
+
 ## Download
 
 You can download pre-built k6 binaries from [Releases](https://github.com/szkiba/xk6-g0/releases/) page. Check [Packages](https://github.com/szkiba/xk6-g0/pkgs/container/xk6-g0) page for pre-built k6 Docker images.

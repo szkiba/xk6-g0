@@ -3,6 +3,7 @@ module github.com/szkiba/xk6-g0
 go 1.18
 
 require (
+	github.com/dop251/goja v0.0.0-20230402114112-623f9dda9079
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/imdario/mergo v0.3.16
 	github.com/sirupsen/logrus v1.9.0
@@ -21,7 +22,6 @@ require (
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dlclark/regexp2 v1.9.0 // indirect
-	github.com/dop251/goja v0.0.0-20230402114112-623f9dda9079 // indirect
 	github.com/ernesto-jimenez/gogen v0.0.0-20180125220232-d7d4131e6607 // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.4-0.20211119122758-180fcef48034+incompatible // indirect

@@ -47,6 +47,7 @@ type Module struct {
 	defaultFunc       DefaultFunc
 	options           map[string]interface{}
 	handleSummaryFunc HandleSummaryFunc
+	ctx               *contextWrapper
 
 	assert  *assertions.Assertions
 	require *requirements.Assertions
@@ -100,6 +101,7 @@ func (mod *Module) initCallbacks() {
 	mod.defaultFunc = toDefaultFunc(mod.yaegi.Eval("Default"))
 	mod.options = toOptions(mod.yaegi.Eval("Options"))
 	mod.handleSummaryFunc = toHandleSummaryFunc(mod.yaegi.Eval("HandleSummary"))
+	mod.ctx = newContextWrapper(mod.vu)
 }
 
 func (mod *Module) Exports() modules.Exports {
@@ -136,19 +138,19 @@ func (mod *Module) Exports() modules.Exports {
 func (mod *Module) callSetup() (interface{}, error) {
 	mod.vu.State().Logger.Debug("Calling Setup")
 
-	return mod.setupFunc(mod.vu.Context(), mod.assert, mod.require)
+	return mod.setupFunc(mod.ctx, mod.assert, mod.require)
 }
 
 func (mod *Module) callTeardown(data interface{}) error {
 	mod.vu.State().Logger.Debug("Calling Teardown")
 
-	return mod.teardownFunc(mod.vu.Context(), mod.assert, mod.require, data)
+	return mod.teardownFunc(mod.ctx, mod.assert, mod.require, data)
 }
 
 func (mod *Module) callDefault(data interface{}) error {
 	mod.vu.State().Logger.Debug("Calling Default")
 
-	err := mod.defaultFunc(mod.vu.Context(), mod.assert, mod.require, data)
+	err := mod.defaultFunc(mod.ctx, mod.assert, mod.require, data)
 	if err != nil {
 		common.Throw(mod.vu.Runtime(), err)
 	}
