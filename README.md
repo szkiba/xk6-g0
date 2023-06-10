@@ -164,6 +164,7 @@ In addition to the go standard library, the following third-party packages can b
   - https://github.com/go-resty/resty
   - https://github.com/sirupsen/logrus
   - https://github.com/stretchr/testify
+  - https://github.com/PuerkitoBio/goquery
 
 
 ### Checks
@@ -253,6 +254,30 @@ var client *resty.Client
 
 func init() {
 	client = resty.New()
+}
+```
+
+### HTML
+
+HTML documents can be parsed and manipulated using the popular [github.com/PuerkitoBio/goquery](https://github.com/PuerkitoBio/goquery) package, which brings a syntax and a set of features similar to jQuery to the Go language.
+
+```go
+package main
+
+import (
+	"github.com/PuerkitoBio/goquery"
+	"github.com/sirupsen/logrus"
+)
+
+func Default() error {
+	doc, err := goquery.NewDocument("https://test.k6.io")
+	if err != nil {
+		return err
+	}
+
+	logrus.Info(doc.Find("h1.title span.text-blue").Text())
+
+	return nil
 }
 ```
 
