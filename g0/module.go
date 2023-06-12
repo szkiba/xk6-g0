@@ -7,6 +7,7 @@ package g0
 import (
 	"os"
 
+	"github.com/szkiba/xk6-g0/g0/addon"
 	"github.com/szkiba/xk6-g0/internal/builtin/testify/assertions"
 	"github.com/szkiba/xk6-g0/internal/builtin/testify/requirements"
 	"github.com/traefik/yaegi/interp"
@@ -27,8 +28,8 @@ func (root *RootModule) NewModuleInstance(vu modules.VU) modules.Instance { // n
 	mod := &Module{                       //nolint:exhaustruct
 		vu:      vu,
 		yaegi:   yaegi,
-		assert:  assertions.New(&checker{fail: false, vu: vu}),
-		require: requirements.New(&checker{fail: true, vu: vu}),
+		assert:  assertions.New(addon.NewTestingT(vu, false)),
+		require: requirements.New(addon.NewTestingT(vu, true)),
 	}
 
 	if err := mod.init(os.Getenv(envScript)); err != nil {

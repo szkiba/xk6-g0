@@ -10,7 +10,7 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/imdario/mergo"
-	"github.com/szkiba/xk6-g0/internal/builtin/stdlib"
+	"github.com/szkiba/xk6-g0/g0/addon"
 	"github.com/traefik/yaegi/interp"
 	"go.k6.io/k6/js/modules"
 )
@@ -21,7 +21,7 @@ var Symbols = interp.Exports{}
 
 func Exports(vu modules.VU) interp.Exports {
 	newDocument := func(url string) (*goquery.Document, error) {
-		client := &http.Client{Transport: stdlib.NewTransport(vu)}
+		client := &http.Client{Transport: addon.NewTransport(vu)}
 
 		resp, err := client.Get(url)
 		if err != nil {

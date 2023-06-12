@@ -8,19 +8,14 @@ import (
 	"sync"
 
 	"github.com/imdario/mergo"
-	"github.com/szkiba/xk6-g0/internal/builtin/goquery"
-	"github.com/szkiba/xk6-g0/internal/builtin/logrus"
-	"github.com/szkiba/xk6-g0/internal/builtin/resty"
-	"github.com/szkiba/xk6-g0/internal/builtin/stdlib"
-	"github.com/szkiba/xk6-g0/internal/builtin/testify"
 	"github.com/traefik/yaegi/interp"
 	"go.k6.io/k6/js/modules"
 )
 
 type ExportsFunc func(modules.VU) interp.Exports
 
-func RegisterExports(fn ExportsFunc) {
-	registry.register(fn)
+func registerExports(fn ...ExportsFunc) {
+	registry.register(fn...)
 }
 
 type exportsRegistry struct {
@@ -30,11 +25,11 @@ type exportsRegistry struct {
 
 var registry exportsRegistry
 
-func (r *exportsRegistry) register(fn ExportsFunc) {
+func (r *exportsRegistry) register(fn ...ExportsFunc) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	r.exports = append(r.exports, fn)
+	r.exports = append(r.exports, fn...)
 }
 
 func (r *exportsRegistry) merge(vu modules.VU) (interp.Exports, error) { //nolint:varnamelen
@@ -50,12 +45,4 @@ func (r *exportsRegistry) merge(vu modules.VU) (interp.Exports, error) { //nolin
 	}
 
 	return symbols, nil
-}
-
-func init() {
-	RegisterExports(stdlib.Exports)
-	RegisterExports(logrus.Exports)
-	RegisterExports(resty.Exports)
-	RegisterExports(testify.Exports)
-	RegisterExports(goquery.Exports)
 }

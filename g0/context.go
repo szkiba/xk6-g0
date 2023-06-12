@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 Iván Szkiba
+//
+// SPDX-License-Identifier: MIT
+
 package g0
 
 import (
