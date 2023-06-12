@@ -3,16 +3,20 @@ module github.com/szkiba/xk6-g0
 go 1.18
 
 require (
+	github.com/PaesslerAG/gval v1.0.0
+	github.com/PaesslerAG/jsonpath v0.1.1
 	github.com/PuerkitoBio/goquery v1.8.1
+	github.com/brianvoe/gofakeit/v6 v6.22.0
 	github.com/dop251/goja v0.0.0-20230402114112-623f9dda9079
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/imdario/mergo v0.3.16
+	github.com/santhosh-tekuri/jsonschema/v5 v5.3.0
 	github.com/sirupsen/logrus v1.9.0
-	github.com/stretchr/testify v1.8.0
+	github.com/stretchr/testify v1.8.1
 	github.com/stretchr/testify/_codegen v0.0.0-20230530093840-f97607b89807
+	github.com/tidwall/gjson v1.14.3
 	github.com/traefik/yaegi v0.14.3
 	go.k6.io/k6 v0.43.1
-
 )
 
 require (
@@ -39,7 +43,6 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/serenize/snaker v0.0.0-20201027110005-a7ad2135616e // indirect
 	github.com/spf13/afero v1.9.5 // indirect
-	github.com/tidwall/gjson v1.14.3 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
 	golang.org/x/crypto v0.9.0 // indirect
