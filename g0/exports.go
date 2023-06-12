@@ -14,7 +14,7 @@ import (
 
 type ExportsFunc func(modules.VU) interp.Exports
 
-func registerExports(fn ...ExportsFunc) {
+func RegisterExports(fn ...ExportsFunc) {
 	registry.register(fn...)
 }
 
