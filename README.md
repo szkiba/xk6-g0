@@ -463,4 +463,4 @@ There are many examples in the [scripts](https://github.com/szkiba/xk6-g0/tree/m
 
 xk6-g0 allows you to install additional packages in addition to the built-in go packages without changing the xk6-g0 source code. For this, for example, a function must be registered from the init() function of a custom k6 extension, which can be used to make additional packages available.
 
-The documentation of this feature will soon be completed with examples.
+Check [xk6-g0-figure](https://github.com/szkiba/xk6-g0-figure) as an example addon.
