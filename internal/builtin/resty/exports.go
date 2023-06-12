@@ -9,7 +9,7 @@ import (
 
 	"github.com/go-resty/resty/v2"
 	"github.com/imdario/mergo"
-	"github.com/szkiba/xk6-g0/internal/builtin/stdlib"
+	"github.com/szkiba/xk6-g0/g0/addon"
 	"github.com/traefik/yaegi/interp"
 	"go.k6.io/k6/js/modules"
 )
@@ -19,7 +19,7 @@ var Symbols = interp.Exports{}
 //go:generate yaegi extract -name resty github.com/go-resty/resty/v2
 
 func Exports(vu modules.VU) interp.Exports {
-	transport := stdlib.NewTransport(vu)
+	transport := addon.NewTransport(vu)
 	newClient := func() *resty.Client {
 		client := resty.New()
 

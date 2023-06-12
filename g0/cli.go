@@ -37,7 +37,7 @@ func isRunCommand(args []string) (bool, int) {
 	return true, scriptIndex
 }
 
-func RedirectStdin() {
+func redirectStdin() {
 	isRun, scriptIndex := isRunCommand(os.Args)
 	if !isRun {
 		return

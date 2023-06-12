@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-package g0
+package addon
 
 import (
 	"errors"
@@ -18,9 +18,20 @@ import (
 	"go.k6.io/k6/metrics"
 )
 
+type TestingT interface {
+	assert.TestingT
+	require.TestingT
+
+	Check(string, bool)
+}
+
 type checker struct {
 	vu   modules.VU
 	fail bool
+}
+
+func NewTestingT(vu modules.VU, fail bool) TestingT {
+	return &checker{vu: vu, fail: fail}
 }
 
 func (c *checker) Errorf(format string, args ...interface{}) {
@@ -97,8 +108,7 @@ func (c *checker) FailNow() {
 }
 
 var (
-	_ assert.TestingT  = (*checker)(nil)
-	_ require.TestingT = (*checker)(nil)
+	_ TestingT = (*checker)(nil)
 
 	errAssertionFailed = errors.New("assertion failed")
 )

@@ -8,15 +8,6 @@ import (
 	"sync"
 
 	"github.com/imdario/mergo"
-	"github.com/szkiba/xk6-g0/internal/builtin/gjson"
-	"github.com/szkiba/xk6-g0/internal/builtin/gofakeit"
-	"github.com/szkiba/xk6-g0/internal/builtin/goquery"
-	"github.com/szkiba/xk6-g0/internal/builtin/jsonpath"
-	jsonschema "github.com/szkiba/xk6-g0/internal/builtin/jsonscema"
-	"github.com/szkiba/xk6-g0/internal/builtin/logrus"
-	"github.com/szkiba/xk6-g0/internal/builtin/resty"
-	"github.com/szkiba/xk6-g0/internal/builtin/stdlib"
-	"github.com/szkiba/xk6-g0/internal/builtin/testify"
 	"github.com/traefik/yaegi/interp"
 	"go.k6.io/k6/js/modules"
 )
@@ -54,16 +45,4 @@ func (r *exportsRegistry) merge(vu modules.VU) (interp.Exports, error) { //nolin
 	}
 
 	return symbols, nil
-}
-
-func init() {
-	RegisterExports(stdlib.Exports)
-	RegisterExports(logrus.Exports)
-	RegisterExports(resty.Exports)
-	RegisterExports(testify.Exports)
-	RegisterExports(goquery.Exports)
-	RegisterExports(gjson.Exports)
-	RegisterExports(jsonpath.Exports)
-	RegisterExports(jsonschema.Exports)
-	RegisterExports(gofakeit.Exports)
 }

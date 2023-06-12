@@ -19,7 +19,6 @@ linters:
     - gochecknoglobals
     - lll
     - wrapcheck
-    - gochecknoinits
 # deprecated
     - deadcode
     - nosnakecase
