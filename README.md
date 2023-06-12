@@ -375,8 +375,6 @@ func init() {
 
 The first parameter of the `Default` function is optionally a [context.Context](https://pkg.go.dev/context). This can be used to perform context aware operations and to access various context variables.
 
-#### k6 variables
-
 The usual k6 variables (eg `__VU`, `__ENV`, `__ITER`) and the variables of the `k6/execution` module can be accessed using the `Value` function of the context parameter.
 
 ```go
@@ -398,37 +396,6 @@ func Default(ctx context.Context) {
   logrus.Info(env["PATH"])
   logrus.Info(ctx.Value("execution.scenario.name"))
 }
-```
-
-#### JavaScript interop
-
-JavaScript variables and functions can be accessed using the `Value` function of the context parameter. In addition, using the `JS` string variable/constant, a JavaScript code fragment can be specified, which is evaluated before the go code is executed. In this way, practically the entire k6 JavaScript API and external modules are made available to the golang script. This feature is useful until all necessary k6 features are available in xk6-g0.
-
-
-```go
-package main
-
-import (
-  "context"
-
-  "github.com/sirupsen/logrus"
-)
-
-func Default(ctx context.Context) {
-  add := ctx.Value("add").(func(...any) any)
-
-  logrus.Info(add(2, 3))
-  logrus.Info(ctx.Value("welcome"))
-}
-
-const JS = `
-
-global.add = function (a, b) {
-  return a + b
-}
-
-global.welcome = 'Hello, World!'
-`
 ```
 
 ## Download

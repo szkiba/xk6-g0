@@ -63,7 +63,7 @@ func redirectStdin() {
 
 	os.Stdin = reader
 
-	_, err = writer.Write(getJs())
+	_, err = writer.Write([]byte(jsScript))
 	if err != nil {
 		writer.Close()
 
@@ -71,25 +71,6 @@ func redirectStdin() {
 
 		logrus.WithError(err).Fatal()
 	}
-}
-
-func getJs() []byte {
-	mod := new(RootModule).NewModuleInstance(nil).(*Module) //nolint:forcetypeassert
-
-	if val, err := mod.yaegi.Eval("JS"); err == nil {
-		return concat([]byte(jsScript), []byte(val.String()))
-	}
-
-	return []byte(jsScript)
-}
-
-func concat(a, b []byte) []byte {
-	tmp := make([]byte, len(a)+len(b))
-
-	copy(tmp, a)
-	copy(tmp[len(a):], b)
-
-	return tmp
 }
 
 const jsScript = `//js
