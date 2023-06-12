@@ -14,8 +14,8 @@ import (
 
 type ExportsFunc func(modules.VU) interp.Exports
 
-func RegisterExports(fn ExportsFunc) {
-	registry.register(fn)
+func registerExports(fn ...ExportsFunc) {
+	registry.register(fn...)
 }
 
 type exportsRegistry struct {
@@ -25,11 +25,11 @@ type exportsRegistry struct {
 
 var registry exportsRegistry
 
-func (r *exportsRegistry) register(fn ExportsFunc) {
+func (r *exportsRegistry) register(fn ...ExportsFunc) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	r.exports = append(r.exports, fn)
+	r.exports = append(r.exports, fn...)
 }
 
 func (r *exportsRegistry) merge(vu modules.VU) (interp.Exports, error) { //nolint:varnamelen

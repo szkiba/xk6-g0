@@ -18,23 +18,24 @@ import (
 )
 
 func registerBuiltins() {
-	RegisterExports(stdlib.Exports)
-	RegisterExports(logrus.Exports)
-	RegisterExports(resty.Exports)
-	RegisterExports(testify.Exports)
-	RegisterExports(goquery.Exports)
-	RegisterExports(gjson.Exports)
-	RegisterExports(jsonpath.Exports)
-	RegisterExports(jsonschema.Exports)
-	RegisterExports(gofakeit.Exports)
+	registerExports(stdlib.Exports)
+	registerExports(logrus.Exports)
+	registerExports(resty.Exports)
+	registerExports(testify.Exports)
+	registerExports(goquery.Exports)
+	registerExports(gjson.Exports)
+	registerExports(jsonpath.Exports)
+	registerExports(jsonschema.Exports)
+	registerExports(gofakeit.Exports)
 }
 
 func registerExtension() {
 	modules.Register("k6/x/g0", New())
 }
 
-func Bootstrap() {
+func Bootstrap(addons ...ExportsFunc) {
 	registerBuiltins()
+	registerExports(addons...)
 	redirectStdin()
 	registerExtension()
 }
