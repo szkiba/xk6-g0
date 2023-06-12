@@ -16,7 +16,7 @@ import (
 
 var Symbols = interp.Exports{}
 
-//go:generate yaegi extract -name resty github.com/go-resty/resty/v2
+//go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name resty github.com/go-resty/resty/v2
 
 func Exports(vu modules.VU) interp.Exports {
 	transport := addon.NewTransport(vu)

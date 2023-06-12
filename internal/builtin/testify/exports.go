@@ -16,7 +16,7 @@ import (
 
 var Symbols = interp.Exports{}
 
-//go:generate yaegi extract -name testify github.com/stretchr/testify/assert github.com/stretchr/testify/require
+//go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name testify github.com/stretchr/testify/assert github.com/stretchr/testify/require
 
 func Exports(vu modules.VU) interp.Exports {
 	exports := interp.Exports{

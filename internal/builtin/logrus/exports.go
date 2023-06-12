@@ -11,7 +11,7 @@ import (
 
 var Symbols = interp.Exports{}
 
-//go:generate yaegi extract -name logrus github.com/sirupsen/logrus
+//go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name logrus github.com/sirupsen/logrus
 
 func Exports(vu modules.VU) interp.Exports {
 	return Symbols

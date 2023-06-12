@@ -17,7 +17,7 @@ import (
 
 var Symbols = interp.Exports{}
 
-//go:generate yaegi extract -name goquery github.com/PuerkitoBio/goquery
+//go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name goquery github.com/PuerkitoBio/goquery
 
 func Exports(vu modules.VU) interp.Exports {
 	newDocument := func(url string) (*goquery.Document, error) {

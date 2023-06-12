@@ -11,7 +11,7 @@ import (
 
 var Symbols = interp.Exports{}
 
-//go:generate yaegi extract -name gjson github.com/tidwall/gjson
+//go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name gjson github.com/tidwall/gjson
 
 func Exports(vu modules.VU) interp.Exports {
 	return Symbols
