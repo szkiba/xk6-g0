@@ -181,17 +181,17 @@ Of course, metrics are also created from the checks defined in this way.
 package main
 
 import (
-	"net/http"
+  "net/http"
 
-	"github.com/stretchr/testify/assert"
+  "github.com/stretchr/testify/assert"
 )
 
 func Default(assert *assert.Assertions) {
-	res, err := http.Get("https://httpbin.test.k6.io/get")
+  res, err := http.Get("https://httpbin.test.k6.io/get")
 
-	assert.NoError(err, "got response without error")
-	assert.Equal(http.StatusOK, res.StatusCode, "status code was 200")
-	assert.Equal("application/json", res.Header.Get("Content-Type"), "content type was application/json")
+  assert.NoError(err, "got response without error")
+  assert.Equal(http.StatusOK, res.StatusCode, "status code was 200")
+  assert.Equal("application/json", res.Header.Get("Content-Type"), "content type was application/json")
 }
 ```
 
@@ -244,20 +244,18 @@ In addition, the https://github.com/go-resty/resty HTTP client can also be used,
 ```go
 package main
 
-import (
-	"github.com/go-resty/resty/v2"
-)
+import "github.com/go-resty/resty/v2"
 
 func Default() error {
-	_, err := client.R().Get("https://httpbin.test.k6.io/get")
+  _, err := client.R().Get("https://httpbin.test.k6.io/get")
 
-	return err
+  return err
 }
 
 var client *resty.Client
 
 func init() {
-	client = resty.New()
+  client = resty.New()
 }
 ```
 
@@ -269,19 +267,19 @@ HTML documents can be parsed and manipulated using the popular [github.com/Puerk
 package main
 
 import (
-	"github.com/PuerkitoBio/goquery"
-	"github.com/sirupsen/logrus"
+  "github.com/PuerkitoBio/goquery"
+  "github.com/sirupsen/logrus"
 )
 
 func Default() error {
-	doc, err := goquery.NewDocument("https://test.k6.io")
-	if err != nil {
-		return err
-	}
+  doc, err := goquery.NewDocument("https://test.k6.io")
+  if err != nil {
+    return err
+  }
 
-	logrus.Info(doc.Find("h1.title span.text-blue").Text())
+  logrus.Info(doc.Find("h1.title span.text-blue").Text())
 
-	return nil
+  return nil
 }
 ```
 
@@ -294,24 +292,24 @@ The [gjson](https://github.com/tidwall/gjson) and [jsonpath](github.com/Paessler
 package main
 
 import (
-	"net/http"
+  "net/http"
 
-	"github.com/go-resty/resty/v2"
-	"github.com/stretchr/testify/require"
-	"github.com/tidwall/gjson"
+  "github.com/go-resty/resty/v2"
+  "github.com/stretchr/testify/require"
+  "github.com/tidwall/gjson"
 )
 
 func Default(require *require.Assertions) {
-	res, err := resty.New().R().Get("https://httpbin.test.k6.io/get")
+  res, err := resty.New().R().Get("https://httpbin.test.k6.io/get")
 
-	require.NoError(err, "request success")
-	require.Equal(http.StatusOK, res.StatusCode(), "status code 200")
+  require.NoError(err, "request success")
+  require.Equal(http.StatusOK, res.StatusCode(), "status code 200")
 
-	body := res.Body()
+  body := res.Body()
 
-	val := gjson.GetBytes(body, "headers.Host").Str
+  val := gjson.GetBytes(body, "headers.Host").Str
 
-	require.Equal("httpbin.test.k6.io", val, "headers.Host value OK")
+  require.Equal("httpbin.test.k6.io", val, "headers.Host value OK")
 }
 ```
 
@@ -320,24 +318,24 @@ func Default(require *require.Assertions) {
 package main
 
 import (
-	"net/http"
+  "net/http"
 
-	"github.com/PaesslerAG/jsonpath"
-	"github.com/go-resty/resty/v2"
-	"github.com/stretchr/testify/require"
+  "github.com/PaesslerAG/jsonpath"
+  "github.com/go-resty/resty/v2"
+  "github.com/stretchr/testify/require"
 )
 
 func Default(require *require.Assertions) {
-	body := make(map[string]interface{})
-	res, err := resty.New().R().SetResult(&body).Get("https://httpbin.test.k6.io/get")
+  body := make(map[string]interface{})
+  res, err := resty.New().R().SetResult(&body).Get("https://httpbin.test.k6.io/get")
 
-	require.NoError(err, "request success")
-	require.Equal(http.StatusOK, res.StatusCode(), "status code 200")
+  require.NoError(err, "request success")
+  require.Equal(http.StatusOK, res.StatusCode(), "status code 200")
 
-	val, err := jsonpath.Get("$.headers.Host", body)
+  val, err := jsonpath.Get("$.headers.Host", body)
 
-	require.NoError(err, "$.headers.Host no error")
-	require.Equal("httpbin.test.k6.io", val, "$.headers.Host value OK")
+  require.NoError(err, "$.headers.Host no error")
+  require.Equal("httpbin.test.k6.io", val, "$.headers.Host value OK")
 }
 ```
 
@@ -351,23 +349,23 @@ package main
 import "github.com/sirupsen/logrus"
 
 func Setup() interface{} {
-	logrus.Info("Setup")
+  logrus.Info("Setup")
 
-	return map[string]interface{}{
-		"foo": "bar",
-	}
+  return map[string]interface{}{
+    "foo": "bar",
+  }
 }
 
 func Default(data interface{}) {
-	logrus.Info("Default", data)
+  logrus.Info("Default", data)
 }
 
 func Teardown(data interface{}) {
-	logrus.Info("Teardown", data)
+  logrus.Info("Teardown", data)
 }
 
 func init() {
-	logrus.Info("init")
+  logrus.Info("init")
 }
 ```
 
