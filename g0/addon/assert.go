@@ -8,7 +8,6 @@ import (
 	"errors"
 	"fmt"
 	"strings"
-	"sync/atomic"
 	"time"
 
 	"github.com/stretchr/testify/assert"
@@ -64,11 +63,6 @@ func (c *checker) Check(name string, succ bool) {
 		tags = tags.With("check", name)
 	}
 
-	check, err := state.Group.Check(name)
-	if err != nil {
-		return
-	}
-
 	ctx := c.vu.Context()
 	now := time.Now()
 
@@ -83,14 +77,6 @@ func (c *checker) Check(name string, succ bool) {
 			Time:     now,
 			Metadata: commonTagsAndMeta.Metadata,
 			Value:    0,
-		}
-
-		if succ {
-			atomic.AddInt64(&check.Passes, 1)
-
-			sample.Value = 1
-		} else {
-			atomic.AddInt64(&check.Fails, 1)
 		}
 
 		metrics.PushIfNotDone(ctx, state.Samples, sample)
