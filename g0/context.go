@@ -8,7 +8,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/dop251/goja"
+	"github.com/grafana/sobek"
 	"go.k6.io/k6/js/common"
 	"go.k6.io/k6/js/modules"
 )
@@ -57,16 +57,16 @@ func (w *contextWrapper) eval(expr string) any {
 	return w.export(val)
 }
 
-func (w *contextWrapper) export(val goja.Value) any {
-	if function, ok := goja.AssertFunction(val); ok {
+func (w *contextWrapper) export(val sobek.Value) any {
+	if function, ok := sobek.AssertFunction(val); ok {
 		return func(goargs ...any) any {
-			jsargs := make([]goja.Value, 0, len(goargs))
+			jsargs := make([]sobek.Value, 0, len(goargs))
 
 			for _, v := range goargs {
 				jsargs = append(jsargs, w.vu.Runtime().ToValue(v))
 			}
 
-			val, err := function(goja.Undefined(), jsargs...)
+			val, err := function(sobek.Undefined(), jsargs...)
 			if err != nil {
 				common.Throw(w.vu.Runtime(), err)
 			}

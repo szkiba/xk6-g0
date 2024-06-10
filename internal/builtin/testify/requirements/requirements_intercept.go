@@ -10,11 +10,12 @@
 package requirements
 
 import (
-  "fmt"
-	assert "github.com/stretchr/testify/assert"
+	"fmt"
 	http "net/http"
 	url "net/url"
 	time "time"
+
+	assert "github.com/stretchr/testify/assert"
 )
 
 func (a *Assertions) Condition(comp assert.Comparison, msgAndArgs ...interface{}) {

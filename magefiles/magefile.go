@@ -19,7 +19,7 @@ import (
 var Default = All
 
 func init() {
-	//os.Setenv("XK6_BUILD_FLAGS", "-tags go1.19 -ldflags='-w -s'")
+	// os.Setenv("XK6_BUILD_FLAGS", "-tags go1.19 -ldflags='-w -s'")
 }
 
 var linter = bintool.Must(bintool.New(
