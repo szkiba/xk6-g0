@@ -1,12 +1,12 @@
 module github.com/szkiba/xk6-g0
 
-go 1.20
+go 1.22
 
 require (
 	github.com/PaesslerAG/gval v1.0.0
 	github.com/PaesslerAG/jsonpath v0.1.1
 	github.com/PuerkitoBio/goquery v1.9.2
-	github.com/brianvoe/gofakeit/v6 v6.22.0
+	github.com/brianvoe/gofakeit/v6 v6.28.0
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/grafana/sobek v0.0.0-20240927094302-19dd311f018f
 	github.com/imdario/mergo v0.3.16

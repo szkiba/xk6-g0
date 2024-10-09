@@ -78,7 +78,7 @@ func init() {
 		"CompanySuffix":             reflect.ValueOf(gofakeit.CompanySuffix),
 		"Connective":                reflect.ValueOf(gofakeit.Connective),
 		"ConnectiveCasual":          reflect.ValueOf(gofakeit.ConnectiveCasual),
-		"ConnectiveComparitive":     reflect.ValueOf(gofakeit.ConnectiveComparitive),
+		"ConnectiveComparative":     reflect.ValueOf(gofakeit.ConnectiveComparative),
 		"ConnectiveComplaint":       reflect.ValueOf(gofakeit.ConnectiveComplaint),
 		"ConnectiveExamplify":       reflect.ValueOf(gofakeit.ConnectiveExamplify),
 		"ConnectiveListing":         reflect.ValueOf(gofakeit.ConnectiveListing),
