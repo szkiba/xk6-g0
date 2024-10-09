@@ -26,3 +26,4 @@ jobs:
         uses: szkiba/xk6bundler@v0
         with:
           with: github.com/szkiba/xk6-g0=/github/workspace
+          k6_version: v0.53.0
