@@ -29,6 +29,6 @@ func (suite *scriptSuite) TestSimple() {
 
 	exports := suite.module.Exports()
 
-	suite.Empty(exports.Named)
+	suite.Len(exports.Named, 1) // workaround for missing handleSummary
 	suite.NotEmpty(exports.Default)
 }
