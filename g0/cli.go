@@ -48,7 +48,7 @@ func redirectStdin() {
 		return
 	}
 
-	os.Setenv(envScript, script)
+	_ = os.Setenv(envScript, script)
 
 	os.Args[scriptIndex] = "-"
 
@@ -65,7 +65,7 @@ func redirectStdin() {
 
 	_, err = writer.Write([]byte(jsScript))
 	if err != nil {
-		writer.Close()
+		_ = writer.Close()
 
 		os.Stdin = origStdin
 
