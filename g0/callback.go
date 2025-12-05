@@ -429,9 +429,13 @@ func toOptions(val reflect.Value, err error) Options {
 	return nil
 }
 
+func handleSummaryNoop(data map[string]any) (map[string]any, error) {
+	return nil, nil
+}
+
 func toHandleSummaryFunc(val reflect.Value, err error) HandleSummaryFunc {
 	if err != nil {
-		return nil
+		return handleSummaryNoop
 	}
 
 	iface := val.Interface()
@@ -446,5 +450,5 @@ func toHandleSummaryFunc(val reflect.Value, err error) HandleSummaryFunc {
 		}
 	}
 
-	return nil
+	return handleSummaryNoop
 }
