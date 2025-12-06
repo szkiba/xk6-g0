@@ -1,4 +1,3 @@
-// nolint:forcetypeassert
 package main
 
 import (

@@ -6,7 +6,7 @@ import (
 )
 
 func Default(ctx context.Context) error {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://httpbin.test.k6.io/get", nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://httpbin.org/get", nil)
 	if err != nil {
 		return err
 	}

@@ -5,7 +5,7 @@ import (
 )
 
 func Default() error {
-	_, err := client.R().Get("https://httpbin.test.k6.io/get")
+	_, err := client.R().Get("https://httpbin.org/get")
 
 	return err
 }
