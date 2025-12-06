@@ -1,7 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
+// Package testify provides the exports for the testify module.
 package testify
 
 import (
@@ -14,11 +11,13 @@ import (
 	"go.k6.io/k6/js/modules"
 )
 
-var Symbols = interp.Exports{}
+// Symbols holds the exported symbols of the testify package.
+var Symbols = interp.Exports{} //nolint:gochecknoglobals
 
 //go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name testify github.com/stretchr/testify/assert github.com/stretchr/testify/require
 
-func Exports(vu modules.VU) interp.Exports {
+// Exports returns the exports for the testify package.
+func Exports(_ modules.VU) interp.Exports {
 	exports := interp.Exports{
 		"github.com/stretchr/testify/assert/assert": {
 			"Assertions": reflect.ValueOf((*assertions.Assertions)(nil)),

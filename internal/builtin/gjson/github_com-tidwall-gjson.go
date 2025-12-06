@@ -3,8 +3,9 @@
 package gjson
 
 import (
-	"github.com/tidwall/gjson"
 	"reflect"
+
+	"github.com/tidwall/gjson"
 )
 
 func init() {

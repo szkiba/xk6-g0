@@ -1,7 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
+// Package logrus provides bindings for the logrus library.
 package logrus
 
 import (
@@ -9,10 +6,12 @@ import (
 	"go.k6.io/k6/js/modules"
 )
 
-var Symbols = interp.Exports{}
+// Symbols holds the exported symbols of the logrus package.
+var Symbols = interp.Exports{} //nolint:gochecknoglobals
 
 //go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name logrus github.com/sirupsen/logrus
 
-func Exports(vu modules.VU) interp.Exports {
+// Exports returns the exports for the logrus package.
+func Exports(_ modules.VU) interp.Exports {
 	return Symbols
 }

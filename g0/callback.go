@@ -17,17 +17,22 @@ import (
 	"github.com/szkiba/xk6-g0/internal/builtin/testify/requirements"
 )
 
+// SetupFunc defines a function that represents the setup function.
 type SetupFunc func(context.Context, *assertions.Assertions, *requirements.Assertions) (interface{}, error)
 
+// TeardownFunc defines a function that represents the teardown function.
 type TeardownFunc func(context.Context, *assertions.Assertions, *requirements.Assertions, interface{}) error
 
+// DefaultFunc defines a function that represents the default function.
 type DefaultFunc func(context.Context, *assertions.Assertions, *requirements.Assertions, interface{}) error
 
+// HandleSummaryFunc defines a function that handles the summary data.
 type HandleSummaryFunc func(map[string]interface{}) (map[string]interface{}, error)
 
+// Options represents the options map.
 type Options map[string]interface{}
 
-func toSetupFunc(val reflect.Value, err error) SetupFunc { // nolint:funlen,cyclop
+func toSetupFunc(val reflect.Value, err error) SetupFunc { //nolint:funlen,cyclop
 	if err != nil {
 		return nil
 	}
@@ -225,7 +230,8 @@ func toTeardownFunc(val reflect.Value, err error) TeardownFunc {
 	return toCallbackFunc(val, err)
 }
 
-func toCallbackFunc(val reflect.Value, err error) func(context.Context, *assertions.Assertions, *requirements.Assertions, interface{}) error { // nolint:funlen,cyclop
+func toCallbackFunc(val reflect.Value, err error, //nolint:funlen,cyclop
+) func(context.Context, *assertions.Assertions, *requirements.Assertions, interface{}) error {
 	if err != nil {
 		return nil
 	}
@@ -265,13 +271,13 @@ func toCallbackFunc(val reflect.Value, err error) func(context.Context, *asserti
 	//
 
 	if fn, ok := iface.(func(context.Context, *assertions.Assertions) error); ok {
-		return func(ctx context.Context, a *assertions.Assertions, _ *requirements.Assertions, data interface{}) error {
+		return func(ctx context.Context, a *assertions.Assertions, _ *requirements.Assertions, _ interface{}) error {
 			return fn(ctx, a)
 		}
 	}
 
 	if fn, ok := iface.(func(context.Context, *requirements.Assertions) error); ok {
-		return func(ctx context.Context, _ *assertions.Assertions, r *requirements.Assertions, data interface{}) error {
+		return func(ctx context.Context, _ *assertions.Assertions, r *requirements.Assertions, _ interface{}) error {
 			return fn(ctx, r)
 		}
 	}
@@ -279,7 +285,7 @@ func toCallbackFunc(val reflect.Value, err error) func(context.Context, *asserti
 	//
 
 	if fn, ok := iface.(func(context.Context, *assertions.Assertions)); ok {
-		return func(ctx context.Context, a *assertions.Assertions, _ *requirements.Assertions, data interface{}) error {
+		return func(ctx context.Context, a *assertions.Assertions, _ *requirements.Assertions, _ interface{}) error {
 			fn(ctx, a)
 
 			return nil
@@ -287,7 +293,7 @@ func toCallbackFunc(val reflect.Value, err error) func(context.Context, *asserti
 	}
 
 	if fn, ok := iface.(func(context.Context, *requirements.Assertions)); ok {
-		return func(ctx context.Context, _ *assertions.Assertions, r *requirements.Assertions, data interface{}) error {
+		return func(ctx context.Context, _ *assertions.Assertions, r *requirements.Assertions, _ interface{}) error {
 			fn(ctx, r)
 
 			return nil
@@ -311,13 +317,13 @@ func toCallbackFunc(val reflect.Value, err error) func(context.Context, *asserti
 	}
 
 	if fn, ok := iface.(func(context.Context) error); ok {
-		return func(ctx context.Context, _ *assertions.Assertions, _ *requirements.Assertions, data interface{}) error {
+		return func(ctx context.Context, _ *assertions.Assertions, _ *requirements.Assertions, _ interface{}) error {
 			return fn(ctx)
 		}
 	}
 
 	if fn, ok := iface.(func(context.Context)); ok {
-		return func(ctx context.Context, _ *assertions.Assertions, _ *requirements.Assertions, data interface{}) error {
+		return func(ctx context.Context, _ *assertions.Assertions, _ *requirements.Assertions, _ interface{}) error {
 			fn(ctx)
 
 			return nil
@@ -391,7 +397,7 @@ func toCallbackFunc(val reflect.Value, err error) func(context.Context, *asserti
 	}
 
 	if fn, ok := iface.(func(interface{})); ok {
-		return func(ctx context.Context, _ *assertions.Assertions, _ *requirements.Assertions, data interface{}) error {
+		return func(_ context.Context, _ *assertions.Assertions, _ *requirements.Assertions, data interface{}) error {
 			fn(data)
 
 			return nil
@@ -429,8 +435,8 @@ func toOptions(val reflect.Value, err error) Options {
 	return nil
 }
 
-func handleSummaryNoop(data map[string]any) (map[string]any, error) {
-	return nil, nil
+func handleSummaryNoop(_ map[string]any) (map[string]any, error) {
+	return nil, nil //nolint:nilnil
 }
 
 func toHandleSummaryFunc(val reflect.Value, err error) HandleSummaryFunc {

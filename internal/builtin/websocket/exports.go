@@ -1,7 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
+// Package websocket provides the exports for the websocket module.
 package websocket
 
 import (
@@ -9,11 +6,13 @@ import (
 	"go.k6.io/k6/js/modules"
 )
 
-var Symbols = interp.Exports{}
+// Symbols holds the exported symbols of the websocket package.
+var Symbols = interp.Exports{} //nolint:gochecknoglobals
 
 //go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name websocket github.com/gorilla/websocket
 //go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name websocket github.com/coder/websocket
 
-func Exports(vu modules.VU) interp.Exports {
+// Exports returns the exports for the websocket package.
+func Exports(_ modules.VU) interp.Exports {
 	return Symbols
 }

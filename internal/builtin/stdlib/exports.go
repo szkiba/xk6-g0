@@ -1,7 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
+// Package stdlib provides the standard library exports for k6.
 package stdlib
 
 import (
@@ -11,6 +8,7 @@ import (
 	"go.k6.io/k6/js/modules"
 )
 
+// Exports returns the exports for the standard library.
 func Exports(vu modules.VU) interp.Exports {
 	exports := interp.Exports{}
 

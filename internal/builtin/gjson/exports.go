@@ -1,7 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
+// Package gjson provides bindings for the gjson library.
 package gjson
 
 import (
@@ -9,10 +6,12 @@ import (
 	"go.k6.io/k6/js/modules"
 )
 
-var Symbols = interp.Exports{}
+// Symbols holds the exported symbols of the gjson package.
+var Symbols = interp.Exports{} //nolint:gochecknoglobals
 
 //go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name gjson github.com/tidwall/gjson
 
-func Exports(vu modules.VU) interp.Exports {
+// Exports returns the exports for the gjson package.
+func Exports(_ modules.VU) interp.Exports {
 	return Symbols
 }

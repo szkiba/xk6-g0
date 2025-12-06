@@ -1,7 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
+// Package g0 provides the g0 module for k6.
 package g0
 
 import (
@@ -17,13 +14,16 @@ import (
 
 const envScript = "XK6_G0_SCRIPT"
 
+// RootModule is the root module for g0.
 type RootModule struct{}
 
+// New creates a new instance of the g0 root module.
 func New() modules.Module {
 	return new(RootModule)
 }
 
-func (root *RootModule) NewModuleInstance(vu modules.VU) modules.Instance { // nolint:varnamelen
+// NewModuleInstance creates a new instance of the g0 module.
+func (root *RootModule) NewModuleInstance(vu modules.VU) modules.Instance { //nolint:varnamelen
 	yaegi := interp.New(interp.Options{}) //nolint:exhaustruct
 	mod := &Module{                       //nolint:exhaustruct
 		vu:      vu,
@@ -39,6 +39,7 @@ func (root *RootModule) NewModuleInstance(vu modules.VU) modules.Instance { // n
 	return mod
 }
 
+// Module represents an instance of the g0 module.
 type Module struct {
 	vu    modules.VU
 	yaegi *interp.Interpreter
@@ -58,6 +59,38 @@ var (
 	_ modules.Module   = (*RootModule)(nil)
 	_ modules.Instance = (*Module)(nil)
 )
+
+// Exports returns the exports of the module.
+func (mod *Module) Exports() modules.Exports {
+	toValue := mod.vu.Runtime().ToValue
+
+	exports := modules.Exports{
+		Default: nil,
+		Named:   make(map[string]interface{}),
+	}
+
+	if mod.defaultFunc != nil {
+		exports.Default = toValue(mod.callDefault)
+	}
+
+	if mod.setupFunc != nil {
+		exports.Named["setup"] = toValue(mod.callSetup)
+	}
+
+	if mod.teardownFunc != nil {
+		exports.Named["teardown"] = toValue(mod.callTeardown)
+	}
+
+	if mod.handleSummaryFunc != nil {
+		exports.Named["handleSummary"] = toValue(mod.callHandleSummary)
+	}
+
+	if mod.options != nil {
+		exports.Named["options"] = toValue(mod.options)
+	}
+
+	return exports
+}
 
 func (mod *Module) initYaegi() error {
 	symbols, err := registry.merge(mod.vu)
@@ -103,37 +136,6 @@ func (mod *Module) initCallbacks() {
 	mod.options = toOptions(mod.yaegi.Eval("Options"))
 	mod.handleSummaryFunc = toHandleSummaryFunc(mod.yaegi.Eval("HandleSummary"))
 	mod.ctx = newContextWrapper(mod.vu)
-}
-
-func (mod *Module) Exports() modules.Exports {
-	toValue := mod.vu.Runtime().ToValue
-
-	exports := modules.Exports{
-		Default: nil,
-		Named:   make(map[string]interface{}),
-	}
-
-	if mod.defaultFunc != nil {
-		exports.Default = toValue(mod.callDefault)
-	}
-
-	if mod.setupFunc != nil {
-		exports.Named["setup"] = toValue(mod.callSetup)
-	}
-
-	if mod.teardownFunc != nil {
-		exports.Named["teardown"] = toValue(mod.callTeardown)
-	}
-
-	if mod.handleSummaryFunc != nil {
-		exports.Named["handleSummary"] = toValue(mod.callHandleSummary)
-	}
-
-	if mod.options != nil {
-		exports.Named["options"] = toValue(mod.options)
-	}
-
-	return exports
 }
 
 func (mod *Module) callSetup() (interface{}, error) {

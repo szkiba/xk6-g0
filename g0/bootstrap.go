@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
 package g0
 
 import (
@@ -33,6 +29,7 @@ func registerExtension() {
 	modules.Register("k6/x/g0", New())
 }
 
+// Bootstrap performs the necessary bootstrap actions for g0.
 func Bootstrap() {
 	redirectStdin()
 	registerBuiltins()

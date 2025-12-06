@@ -1,15 +1,14 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
+// Package requirements provides wrappers around testify requirements.
 package requirements
 
 import "github.com/stretchr/testify/require"
 
+// Assertions wraps testify assertions to provide better error messages in k6.
 type Assertions struct {
 	t require.TestingT
 }
 
+// New creates a new Assertions instance.
 func New(t require.TestingT) *Assertions {
 	return &Assertions{
 		t: t,
@@ -21,7 +20,7 @@ type tHelper interface {
 }
 
 type tChecker interface {
-	Check(string, bool)
+	Check(name string, succ bool)
 }
 
 //go:generate go run github.com/stretchr/testify/_codegen -output-package=requirements -template=requirements_intercept.go.tmpl -include-format-funcs
