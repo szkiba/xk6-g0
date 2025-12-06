@@ -7,7 +7,7 @@ package g0
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 	"go.k6.io/k6/js/modulestest"
 )
@@ -22,16 +22,16 @@ func newHelper(t *testing.T) *testHelper {
 	t.Helper()
 
 	runtime := modulestest.NewRuntime(t)
-	vu := runtime.VU // nolint:varnamelen
+	vu := runtime.VU //nolint:varnamelen
 
-	assert.NoError(t, vu.Runtime().Set("__VU", 1))
+	require.NoError(t, vu.Runtime().Set("__VU", 1))
 
 	root := New()
 
 	var module *Module
 
-	assert.NotPanics(t, func() { module = root.NewModuleInstance(vu).(*Module) }) // nolint:forcetypeassert
-	assert.NotNil(t, module)
+	require.NotPanics(t, func() { module = root.NewModuleInstance(vu).(*Module) }) //nolint:forcetypeassert
+	require.NotNil(t, module)
 
 	return &testHelper{
 		runtime: runtime,

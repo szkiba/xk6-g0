@@ -21,7 +21,7 @@ func isRunCommand(args []string) (bool, int) {
 
 	var runIndex int
 
-	for idx := 0; idx < argn; idx++ {
+	for idx := range argn {
 		arg := args[idx]
 		if arg == "run" && runIndex == 0 {
 			runIndex = idx
@@ -48,7 +48,7 @@ func redirectStdin() {
 		return
 	}
 
-	os.Setenv(envScript, script)
+	_ = os.Setenv(envScript, script)
 
 	os.Args[scriptIndex] = "-"
 
@@ -57,15 +57,17 @@ func redirectStdin() {
 		logrus.WithError(err).Fatal()
 	}
 
-	defer writer.Close()
+	defer func() {
+		_ = writer.Close()
+	}()
 
 	origStdin := os.Stdin
 
 	os.Stdin = reader
 
-	_, err = writer.Write([]byte(jsScript))
+	_, err = writer.WriteString(jsScript)
 	if err != nil {
-		writer.Close()
+		_ = writer.Close()
 
 		os.Stdin = origStdin
 

@@ -1,7 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
+// Package goquery provides bindings for the goquery library.
 package goquery
 
 import (
@@ -15,20 +12,31 @@ import (
 	"go.k6.io/k6/js/modules"
 )
 
-var Symbols = interp.Exports{}
+// Symbols holds the exported symbols of the goquery package.
+var Symbols = interp.Exports{} //nolint:gochecknoglobals
 
 //go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name goquery github.com/PuerkitoBio/goquery
 
+// Exports returns the exports for the goquery package.
 func Exports(vu modules.VU) interp.Exports {
 	newDocument := func(url string) (*goquery.Document, error) {
 		client := &http.Client{Transport: addon.NewTransport(vu)}
 
-		resp, err := client.Get(url)
+		req, err := http.NewRequestWithContext(vu.Context(), http.MethodGet, url, nil)
 		if err != nil {
 			return nil, err
 		}
 
-		return goquery.NewDocumentFromResponse(resp)
+		resp, err := client.Do(req)
+		if err != nil {
+			return nil, err
+		}
+
+		defer func() {
+			_ = resp.Body.Close()
+		}()
+
+		return goquery.NewDocumentFromReader(resp.Body)
 	}
 	exports := interp.Exports{
 		"github.com/PuerkitoBio/goquery/goquery": {

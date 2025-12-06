@@ -7,7 +7,7 @@ import (
 )
 
 func Default(assert *assert.Assertions) {
-	res, err := http.Get("https://httpbin.test.k6.io/get")
+	res, err := http.Get("https://httpbin.org/get")
 
 	assert.NoError(err, "got response without error")
 	assert.Equal(http.StatusOK, res.StatusCode, "status code was 200")

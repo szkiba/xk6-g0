@@ -1,7 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
+// Package addon provides additional utilities for the g0 module.
 package addon
 
 import (
@@ -17,11 +14,12 @@ import (
 	"go.k6.io/k6/metrics"
 )
 
+// TestingT is an implementation of testify's TestingT interface that integrates with k6's VU.
 type TestingT interface {
 	assert.TestingT
 	require.TestingT
 
-	Check(string, bool)
+	Check(name string, succ bool)
 }
 
 type checker struct {
@@ -29,11 +27,12 @@ type checker struct {
 	fail bool
 }
 
+// NewTestingT creates a new TestingT implementation for the given VU.
 func NewTestingT(vu modules.VU, fail bool) TestingT {
 	return &checker{vu: vu, fail: fail}
 }
 
-func (c *checker) Errorf(format string, args ...interface{}) {
+func (c *checker) Errorf(format string, args ...any) {
 	state := c.vu.State()
 	if state == nil {
 		return
@@ -66,6 +65,12 @@ func (c *checker) Check(name string, succ bool) {
 	ctx := c.vu.Context()
 	now := time.Now()
 
+	var val float64
+
+	if succ {
+		val = 1
+	}
+
 	select {
 	case <-ctx.Done():
 	default:
@@ -76,7 +81,7 @@ func (c *checker) Check(name string, succ bool) {
 			},
 			Time:     now,
 			Metadata: commonTagsAndMeta.Metadata,
-			Value:    0,
+			Value:    val,
 		}
 
 		metrics.PushIfNotDone(ctx, state.Samples, sample)

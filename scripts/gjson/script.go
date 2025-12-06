@@ -9,7 +9,7 @@ import (
 )
 
 func Default(require *require.Assertions) {
-	res, err := resty.New().R().Get("https://httpbin.test.k6.io/get")
+	res, err := resty.New().R().Get("https://httpbin.org/get")
 
 	require.NoError(err, "request success")
 	require.Equal(http.StatusOK, res.StatusCode(), "status code 200")
@@ -18,5 +18,5 @@ func Default(require *require.Assertions) {
 
 	val := gjson.GetBytes(body, "headers.Host").Str
 
-	require.Equal("httpbin.test.k6.io", val, "headers.Host value OK")
+	require.Equal("httpbin.org", val, "headers.Host value OK")
 }

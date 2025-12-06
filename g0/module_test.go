@@ -13,7 +13,7 @@ import (
 func TestNewModuleInstance(t *testing.T) {
 	t.Parallel()
 
-	tc := newHelper(t) // nolint:varnamelen
+	tc := newHelper(t) //nolint:varnamelen
 	mod := tc.module
 
 	exports := mod.Exports()

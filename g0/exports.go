@@ -12,8 +12,10 @@ import (
 	"go.k6.io/k6/js/modules"
 )
 
+// ExportsFunc defines a function that returns the exports for a module.
 type ExportsFunc func(modules.VU) interp.Exports
 
+// RegisterExports registers one or more ExportsFunc to the g0 module.
 func RegisterExports(fn ...ExportsFunc) {
 	registry.register(fn...)
 }
@@ -23,7 +25,7 @@ type exportsRegistry struct {
 	mu      sync.RWMutex
 }
 
-var registry exportsRegistry
+var registry exportsRegistry //nolint:gochecknoglobals
 
 func (r *exportsRegistry) register(fn ...ExportsFunc) {
 	r.mu.Lock()

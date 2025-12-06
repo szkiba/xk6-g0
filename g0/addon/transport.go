@@ -21,16 +21,31 @@ type tripware struct {
 	vu modules.VU
 }
 
-var _ http.RoundTripper = (*tripware)(nil)
-
-func NewTransport(vu modules.VU) http.RoundTripper {
-	return &tripware{vu: vu}
-}
-
 const (
 	httpTimeout = 60 * time.Second
 	protoFields = 2
 )
+
+var _ http.RoundTripper = (*tripware)(nil)
+
+// NewTransport creates a new HTTP transport that integrates with k6's VU.
+func NewTransport(vu modules.VU) http.RoundTripper {
+	return &tripware{vu: vu}
+}
+
+func (t *tripware) RoundTrip(req *http.Request) (*http.Response, error) {
+	preq, err := t.toParsedRequest(req)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := httpext.MakeRequest(t.vu.Context(), t.vu.State(), preq)
+	if err != nil {
+		return nil, err
+	}
+
+	return t.toResponse(req, resp)
+}
 
 func (t *tripware) toParsedRequest(req *http.Request) (*httpext.ParsedHTTPRequest, error) {
 	state := t.vu.State()
@@ -45,7 +60,7 @@ func (t *tripware) toParsedRequest(req *http.Request) (*httpext.ParsedHTTPReques
 		return nil, err
 	}
 
-	preq := &httpext.ParsedHTTPRequest{ // nolint:exhaustruct
+	preq := &httpext.ParsedHTTPRequest{ //nolint:exhaustruct
 		URL:         &url,
 		Req:         req,
 		Timeout:     httpTimeout,
@@ -69,7 +84,7 @@ func (t *tripware) toParsedRequest(req *http.Request) (*httpext.ParsedHTTPReques
 
 		preq.Body = bytes.NewBuffer(data)
 
-		req.Body.Close()
+		_ = req.Body.Close()
 	}
 
 	preq.Req.Header.Set("User-Agent", state.Options.UserAgent.String)
@@ -111,18 +126,4 @@ func (t *tripware) toResponse(req *http.Request, eresp *httpext.Response) (*http
 	resp.StatusCode = eresp.Status
 
 	return resp, nil
-}
-
-func (t *tripware) RoundTrip(req *http.Request) (*http.Response, error) {
-	preq, err := t.toParsedRequest(req)
-	if err != nil {
-		return nil, err
-	}
-
-	resp, err := httpext.MakeRequest(t.vu.Context(), t.vu.State(), preq)
-	if err != nil {
-		return nil, err
-	}
-
-	return t.toResponse(req, resp)
 }

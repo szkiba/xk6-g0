@@ -147,9 +147,6 @@ var Options map[string]interface{}
 
 The xk6-g0 is currently in Proof of Concept status. The further fate of the development depends on the community's feedback on the usefulness of the concept.
 
-**Is it useful to support the go language (yaegi interpreter) in k6 tests?**
-You can vote here: https://github.com/szkiba/xk6-g0/discussions/1
-
 ## API
 
 **The primary API design consideration: don't have an API at all.**
@@ -169,7 +166,8 @@ In addition to the go standard library, the following third-party packages can b
   - https://github.com/PaesslerAG/jsonpath
   - https://github.com/santhosh-tekuri/jsonschema/v5
   - https://github.com/brianvoe/gofakeit/v6
-
+  - https://github.com/gorilla/websocket
+  - https://github.com/coder/websocket
 
 ### Checks
 
@@ -398,7 +396,7 @@ func Default(ctx context.Context) {
 
 ## Download
 
-You can download pre-built k6 binaries from [Releases](https://github.com/szkiba/xk6-g0/releases/) page. Check [Packages](https://github.com/szkiba/xk6-g0/pkgs/container/xk6-g0) page for pre-built k6 Docker images.
+You can download pre-built k6 binaries from [Releases](https://github.com/szkiba/xk6-g0/releases/) page.
 
 ## Build
 
@@ -425,9 +423,6 @@ You must have the latest Go version installed to build the k6 binary. The latest
    xk6 build --with github.com/szkiba/xk6-g0@latest
    ```
 
-> **Note**
-> You can always use the latest version of k6 to build the extension, but the earliest version of k6 that supports extensions via xk6 is v0.43.1. The xk6 is constantly evolving, so some APIs may not be backward compatible.
-
 ### Build for development
 
 If you want to add a feature or make a fix, clone the project and build it using the following commands. The xk6 will force the build to use the local clone instead of fetching the latest version from the repository. This process enables you to update the code and test it locally.
@@ -435,22 +430,6 @@ If you want to add a feature or make a fix, clone the project and build it using
 ```bash
 git clone git@github.com:szkiba/xk6-g0.git && cd xk6-g0
 xk6 build --with github.com/szkiba/xk6-g0@latest=.
-```
-
-## Docker
-
-You can also use pre-built k6 image within a Docker container. In order to do that, you will need to execute something like the following:
-
-**Linux**
-
-```plain
-docker run -v $(pwd):/work -it --rm ghcr.io/szkiba/xk6-g0:latest run /work/scripts/simple/script.go
-```
-
-**Windows**
-
-```plain
-docker run -v %cd%:/work -it --rm ghcr.io/szkiba/xk6-g0:latest run /work/scripts/simple/script.go
 ```
 
 ## Example scripts

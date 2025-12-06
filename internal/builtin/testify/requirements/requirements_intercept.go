@@ -1,21 +1,13 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
-/*
-* CODE GENERATED AUTOMATICALLY WITH github.com/stretchr/testify/_codegen
-* THIS FILE MUST NOT BE EDITED BY HAND
- */
+// Code generated with github.com/stretchr/testify/_codegen; DO NOT EDIT.
 
 package requirements
 
 import (
-	"fmt"
+  "fmt"
+	assert "github.com/stretchr/testify/assert"
 	http "net/http"
 	url "net/url"
 	time "time"
-
-	assert "github.com/stretchr/testify/assert"
 )
 
 func (a *Assertions) Condition(comp assert.Comparison, msgAndArgs ...interface{}) {
@@ -200,6 +192,34 @@ func (a *Assertions) EqualErrorf(theError error, errString string, msg string, a
 	}
 }
 
+func (a *Assertions) EqualExportedValues(expected interface{}, actual interface{}, msgAndArgs ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.EqualExportedValues(a.t, expected, actual, msgAndArgs...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprint(msgAndArgs...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
+func (a *Assertions) EqualExportedValuesf(expected interface{}, actual interface{}, msg string, args ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.EqualExportedValuesf(a.t, expected, actual, msg, args...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprintf(msg, args...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
 func (a *Assertions) EqualValues(expected interface{}, actual interface{}, msgAndArgs ...interface{}) {
 	if h, ok := a.t.(tHelper); ok {
 		h.Helper()
@@ -361,6 +381,34 @@ func (a *Assertions) Eventually(condition func() bool, waitFor time.Duration, ti
 	succ := assert.Eventually(a.t, condition, waitFor, tick, msgAndArgs...)
 	if c, ok := a.t.(tChecker); ok {
 		name := fmt.Sprint(msgAndArgs...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
+func (a *Assertions) EventuallyWithT(condition func(collect *assert.CollectT), waitFor time.Duration, tick time.Duration, msgAndArgs ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.EventuallyWithT(a.t, condition, waitFor, tick, msgAndArgs...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprint(msgAndArgs...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
+func (a *Assertions) EventuallyWithTf(condition func(collect *assert.CollectT), waitFor time.Duration, tick time.Duration, msg string, args ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.EventuallyWithTf(a.t, condition, waitFor, tick, msg, args...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprintf(msg, args...)
 		c.Check(name, succ)
 	}
 	if !succ {
@@ -1026,6 +1074,34 @@ func (a *Assertions) IsNonIncreasingf(object interface{}, msg string, args ...in
 	}
 }
 
+func (a *Assertions) IsNotType(theType interface{}, object interface{}, msgAndArgs ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.IsNotType(a.t, theType, object, msgAndArgs...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprint(msgAndArgs...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
+func (a *Assertions) IsNotTypef(theType interface{}, object interface{}, msg string, args ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.IsNotTypef(a.t, theType, object, msg, args...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprintf(msg, args...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
 func (a *Assertions) IsType(expectedType interface{}, object interface{}, msgAndArgs ...interface{}) {
 	if h, ok := a.t.(tHelper); ok {
 		h.Helper()
@@ -1362,6 +1438,34 @@ func (a *Assertions) NotContainsf(s interface{}, contains interface{}, msg strin
 	}
 }
 
+func (a *Assertions) NotElementsMatch(listA interface{}, listB interface{}, msgAndArgs ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.NotElementsMatch(a.t, listA, listB, msgAndArgs...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprint(msgAndArgs...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
+func (a *Assertions) NotElementsMatchf(listA interface{}, listB interface{}, msg string, args ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.NotElementsMatchf(a.t, listA, listB, msg, args...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprintf(msg, args...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
 func (a *Assertions) NotEmpty(object interface{}, msgAndArgs ...interface{}) {
 	if h, ok := a.t.(tHelper); ok {
 		h.Helper()
@@ -1446,6 +1550,34 @@ func (a *Assertions) NotEqualf(expected interface{}, actual interface{}, msg str
 	}
 }
 
+func (a *Assertions) NotErrorAs(err error, target interface{}, msgAndArgs ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.NotErrorAs(a.t, err, target, msgAndArgs...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprint(msgAndArgs...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
+func (a *Assertions) NotErrorAsf(err error, target interface{}, msg string, args ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.NotErrorAsf(a.t, err, target, msg, args...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprintf(msg, args...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
 func (a *Assertions) NotErrorIs(err error, target error, msgAndArgs ...interface{}) {
 	if h, ok := a.t.(tHelper); ok {
 		h.Helper()
@@ -1465,6 +1597,34 @@ func (a *Assertions) NotErrorIsf(err error, target error, msg string, args ...in
 		h.Helper()
 	}
 	succ := assert.NotErrorIsf(a.t, err, target, msg, args...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprintf(msg, args...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
+func (a *Assertions) NotImplements(interfaceObject interface{}, object interface{}, msgAndArgs ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.NotImplements(a.t, interfaceObject, object, msgAndArgs...)
+	if c, ok := a.t.(tChecker); ok {
+		name := fmt.Sprint(msgAndArgs...)
+		c.Check(name, succ)
+	}
+	if !succ {
+		a.t.FailNow()
+	}
+}
+
+func (a *Assertions) NotImplementsf(interfaceObject interface{}, object interface{}, msg string, args ...interface{}) {
+	if h, ok := a.t.(tHelper); ok {
+		h.Helper()
+	}
+	succ := assert.NotImplementsf(a.t, interfaceObject, object, msg, args...)
 	if c, ok := a.t.(tChecker); ok {
 		name := fmt.Sprintf(msg, args...)
 		c.Check(name, succ)

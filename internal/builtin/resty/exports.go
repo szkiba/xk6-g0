@@ -1,7 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Iván Szkiba
-//
-// SPDX-License-Identifier: MIT
-
+// Package resty provides bindings for the resty library.
 package resty
 
 import (
@@ -14,10 +11,12 @@ import (
 	"go.k6.io/k6/js/modules"
 )
 
-var Symbols = interp.Exports{}
+// Symbols holds the exported symbols of the resty package.
+var Symbols = interp.Exports{} //nolint:gochecknoglobals
 
 //go:generate go run github.com/traefik/yaegi/cmd/yaegi extract -name resty github.com/go-resty/resty/v2
 
+// Exports returns the exports for the resty package.
 func Exports(vu modules.VU) interp.Exports {
 	transport := addon.NewTransport(vu)
 	newClient := func() *resty.Client {
