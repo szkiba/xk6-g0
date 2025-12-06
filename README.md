@@ -143,10 +143,6 @@ func HandleSummary(data map[string]interface{}) map[string]interface{}
 var Options map[string]interface{}
 ```
 
-## Roadmap
-
-The xk6-g0 is currently in Proof of Concept status. The further fate of the development depends on the community's feedback on the usefulness of the concept.
-
 ## API
 
 **The primary API design consideration: don't have an API at all.**
@@ -441,3 +437,9 @@ There are many examples in the [scripts](https://github.com/szkiba/xk6-g0/tree/m
 xk6-g0 allows you to install additional packages in addition to the built-in go packages without changing the xk6-g0 source code. For this, for example, a function must be registered from the init() function of a custom k6 extension, which can be used to make additional packages available.
 
 Check [xk6-g0-figure](https://github.com/szkiba/xk6-g0-figure) as an example addon.
+
+## Feedback
+
+If you find the xk6-g0 extension useful, please star the repo. The number of stars will determine the time allocated for maintenance.
+
+[![Stargazers over time](https://starchart.cc/szkiba/xk6-g0.svg?variant=adaptive)](https://starchart.cc/szkiba/xk6-g0)
