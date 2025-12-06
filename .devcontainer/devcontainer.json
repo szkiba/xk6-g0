@@ -21,8 +21,8 @@
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": { "version": "2.72.0" },
     "ghcr.io/devcontainers/features/go:1": {
-      "version": "1.25.5",
-      "golangciLintVersion": "2.5.0"
+      "version": "1.25",
+      "golangciLintVersion": "2.7.1"
     },
     "ghcr.io/michidk/devcontainers-features/bun:1": { "version": "1.2.12" },
     "ghcr.io/szkiba/devcontainer-features/gosec:1": { "version": "2.22.4" },

@@ -32,7 +32,7 @@ func NewTestingT(vu modules.VU, fail bool) TestingT {
 	return &checker{vu: vu, fail: fail}
 }
 
-func (c *checker) Errorf(format string, args ...interface{}) {
+func (c *checker) Errorf(format string, args ...any) {
 	state := c.vu.State()
 	if state == nil {
 		return

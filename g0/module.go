@@ -47,7 +47,7 @@ type Module struct {
 	setupFunc         SetupFunc
 	teardownFunc      TeardownFunc
 	defaultFunc       DefaultFunc
-	options           map[string]interface{}
+	options           map[string]any
 	handleSummaryFunc HandleSummaryFunc
 	ctx               *contextWrapper
 
@@ -66,7 +66,7 @@ func (mod *Module) Exports() modules.Exports {
 
 	exports := modules.Exports{
 		Default: nil,
-		Named:   make(map[string]interface{}),
+		Named:   make(map[string]any),
 	}
 
 	if mod.defaultFunc != nil {
@@ -138,19 +138,19 @@ func (mod *Module) initCallbacks() {
 	mod.ctx = newContextWrapper(mod.vu)
 }
 
-func (mod *Module) callSetup() (interface{}, error) {
+func (mod *Module) callSetup() (any, error) {
 	mod.vu.State().Logger.Debug("Calling Setup")
 
 	return mod.setupFunc(mod.ctx, mod.assert, mod.require)
 }
 
-func (mod *Module) callTeardown(data interface{}) error {
+func (mod *Module) callTeardown(data any) error {
 	mod.vu.State().Logger.Debug("Calling Teardown")
 
 	return mod.teardownFunc(mod.ctx, mod.assert, mod.require, data)
 }
 
-func (mod *Module) callDefault(data interface{}) error {
+func (mod *Module) callDefault(data any) error {
 	mod.vu.State().Logger.Debug("Calling Default")
 
 	err := mod.defaultFunc(mod.ctx, mod.assert, mod.require, data)
@@ -161,7 +161,7 @@ func (mod *Module) callDefault(data interface{}) error {
 	return err
 }
 
-func (mod *Module) callHandleSummary(data map[string]interface{}) map[string]interface{} {
+func (mod *Module) callHandleSummary(data map[string]any) map[string]any {
 	mod.vu.State().Logger.Debug("Calling HandleSummary")
 
 	res, err := mod.handleSummaryFunc(data)
