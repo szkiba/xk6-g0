@@ -43,7 +43,7 @@ The return values of the lifecycle callback functions are optional, they can als
 The script is executed similarly to the JavaScript language:
 
 ```bash
-./k6 run scripts/simple/script.go
+./k6 run examples/simple/script.go
 ```
 
 ### Setup
@@ -430,7 +430,7 @@ xk6 build --with github.com/szkiba/xk6-g0@latest=.
 
 ## Example scripts
 
-There are many examples in the [scripts](https://github.com/szkiba/xk6-g0/tree/master/scripts) directory that show how to use various features of the extension.
+There are many examples in the [examples](https://github.com/szkiba/xk6-g0/tree/main/examples) directory that show how to use various features of the extension.
 
 ## Extending xk6-g0
 
