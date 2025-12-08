@@ -7,7 +7,7 @@ package g0
 import (
 	"sync"
 
-	"github.com/imdario/mergo"
+	"dario.cat/mergo"
 	"github.com/traefik/yaegi/interp"
 	"go.k6.io/k6/js/modules"
 )

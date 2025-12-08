@@ -45,7 +45,7 @@ linters:
             - github.com/go-resty/resty/v2
             - github.com/gorilla/websocket
             - github.com/grafana/sobek
-            - github.com/imdario/mergo
+            - dario.cat/mergo
             - github.com/santhosh-tekuri/jsonschema/v5
             - github.com/sirupsen/logrus
             - github.com/stretchr/testify

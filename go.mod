@@ -3,6 +3,7 @@ module github.com/szkiba/xk6-g0
 go 1.24.0
 
 require (
+	dario.cat/mergo v1.0.2
 	github.com/PaesslerAG/gval v1.2.4
 	github.com/PaesslerAG/jsonpath v0.1.1
 	github.com/PuerkitoBio/goquery v1.11.0
@@ -11,7 +12,6 @@ require (
 	github.com/go-resty/resty/v2 v2.17.0
 	github.com/gorilla/websocket v1.5.3
 	github.com/grafana/sobek v0.0.0-20251124090928-9a028a30ff58
-	github.com/imdario/mergo v0.3.16
 	github.com/santhosh-tekuri/jsonschema/v5 v5.3.1
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.11.1

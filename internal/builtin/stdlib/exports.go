@@ -2,7 +2,7 @@
 package stdlib
 
 import (
-	"github.com/imdario/mergo"
+	"dario.cat/mergo"
 	"github.com/traefik/yaegi/interp"
 	"github.com/traefik/yaegi/stdlib"
 	"go.k6.io/k6/js/modules"

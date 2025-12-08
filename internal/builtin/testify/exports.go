@@ -4,7 +4,7 @@ package testify
 import (
 	"reflect"
 
-	"github.com/imdario/mergo"
+	"dario.cat/mergo"
 	"github.com/szkiba/xk6-g0/internal/builtin/testify/assertions"
 	"github.com/szkiba/xk6-g0/internal/builtin/testify/requirements"
 	"github.com/traefik/yaegi/interp"
