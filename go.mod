@@ -9,7 +9,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.11.0
 	github.com/brianvoe/gofakeit/v6 v6.28.0
 	github.com/coder/websocket v1.8.14
-	github.com/go-resty/resty/v2 v2.17.0
+	github.com/go-resty/resty/v2 v2.17.1
 	github.com/gorilla/websocket v1.5.3
 	github.com/grafana/sobek v0.0.0-20251124090928-9a028a30ff58
 	github.com/santhosh-tekuri/jsonschema/v5 v5.3.1
